@@ -1,3 +1,31 @@
 ID: mtaproject
 _schema-version: '2.1'
 version: 0.0.1
+
+modules:
+ - name: uimodule
+   type: html5
+   path: uimodule
+   parameters:
+      disk-quota: 512M
+      memory: 256M
+   build-parameters:
+      builder: grunt
+   requires:
+    - name: uaa_mtaproject
+    - name: dest_mtaproject
+
+resources:
+ - name: uaa_mtaproject
+   parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+   type: org.cloudfoundry.managed-service
+
+ - name: dest_mtaproject
+   parameters:
+      service-plan: lite
+      service: destination
+   type: org.cloudfoundry.managed-service
+
